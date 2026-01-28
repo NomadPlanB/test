@@ -1,62 +1,96 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인공지능 동물상 테스트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="AI가 분석하는 나의 동물상! 사진 한 장으로 어떤 동물과 닮았는지 알아보세요.">
+    <meta name="theme-color" content="#FF7B54">
+    <title>AI 동물상 테스트 | 나는 어떤 동물을 닮았을까?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-distance">
-        <div class="container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
             <a class="navbar-brand" href="#">동물상 테스트</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="메뉴 열기">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">공유하기</a>
+                        <button id="theme-btn" class="btn">
+                            <span class="theme-icon">🌙</span>
+                            <span class="theme-text">다크모드</span>
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="section">
-        <h1 class="title">인공지능 동물상 테스트</h1>
-        <h2 class="subtitle">나는 어떤 동물과 닮았을까?</h2>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <span class="hero-badge">AI 얼굴 분석</span>
+            <h1 class="title">
+                나는 어떤 <span class="title-gradient">동물상</span>일까?
+            </h1>
+            <p class="subtitle">
+                사진 한 장으로 AI가 분석하는 나의 동물상을 확인해보세요
+            </p>
+        </div>
     </section>
 
-    <div class="container mt-5 file-upload">
-        <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
-                <img src="https://img.icons8.com/ios/50/000000/upload-to-cloud.png" class="mt-5 pt-5 upload-icon" alt="upload icon">
-                <h3 class="mb-5 pb-5 pt-4 upload-text">사진을 올려놓거나 눌러서 업로드하세요!</h3>
-            </div>
-        </div>
-        <div class="file-upload-content">
-            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
-            <div id="loading" class="animated-background">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+    <!-- Main Upload Card -->
+    <main class="main-container">
+        <div class="file-upload">
+            <!-- Upload Area -->
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type="file" accept="image/*" id="file-input">
+                <div class="drag-text">
+                    <div class="upload-icon-wrapper">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <p class="upload-text">사진을 드래그하거나 클릭하여 업로드</p>
+                    <p class="upload-hint">JPG, PNG 파일 지원</p>
                 </div>
-                <p class="text-center">AI가 분석중입니다...</p>
             </div>
-            <p class="result-message"></p>
-            <div id="label-container" class="d-flex flex-column justify-content-center align-items-center"></div>
-            <div class="image-title-wrap">
-                <button type="button" onclick="removeUpload()" class="remove-image">다른 사진으로 재시도</button>
+
+            <!-- Result Area -->
+            <div class="file-upload-content">
+                <div class="image-preview-wrapper">
+                    <img class="file-upload-image" id="face-image" src="#" alt="업로드된 이미지">
+                </div>
+
+                <div id="loading">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">AI가 분석중입니다<span class="loading-dots"></span></p>
+                </div>
+
+                <p class="result-message"></p>
+
+                <div id="label-container"></div>
+
+                <button type="button" class="remove-image" id="retry-btn">
+                    다른 사진으로 다시 테스트
+                </button>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Bootstrap Bundle with Popper -->
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with ❤️ for fun</p>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
