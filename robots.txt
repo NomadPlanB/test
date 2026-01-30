@@ -1,0 +1,11 @@
+# robots.txt for 동물상 테스트
+# https://test-1f1.pages.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://test-1f1.pages.dev/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
