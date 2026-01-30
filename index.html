@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- TensorFlow.js & Teachable Machine -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -48,8 +51,27 @@
     <!-- Main Upload Card -->
     <main class="main-container">
         <div class="file-upload">
+            <!-- Mode Tabs -->
+            <div class="mode-tabs">
+                <button class="mode-tab active" data-mode="upload" id="upload-tab">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    사진 업로드
+                </button>
+                <button class="mode-tab" data-mode="camera" id="camera-tab">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                    카메라
+                </button>
+            </div>
+
             <!-- Upload Area -->
-            <div class="image-upload-wrap">
+            <div class="image-upload-wrap" id="upload-area">
                 <input class="file-upload-input" type="file" accept="image/*" id="file-input">
                 <div class="drag-text">
                     <div class="upload-icon-wrapper">
@@ -64,10 +86,20 @@
                 </div>
             </div>
 
+            <!-- Camera Area -->
+            <div class="camera-area" id="camera-area" style="display: none;">
+                <div id="webcam-container"></div>
+                <button type="button" class="capture-btn" id="capture-btn">
+                    <span class="capture-icon"></span>
+                    촬영하기
+                </button>
+            </div>
+
             <!-- Result Area -->
             <div class="file-upload-content">
                 <div class="image-preview-wrapper">
                     <img class="file-upload-image" id="face-image" src="#" alt="업로드된 이미지">
+                    <canvas id="captured-canvas" style="display: none;"></canvas>
                 </div>
 
                 <div id="loading">
