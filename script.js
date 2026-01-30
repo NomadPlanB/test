@@ -157,6 +157,8 @@ async function switchMode(mode) {
 
     // 카메라 모드일 때 웹캠 시작
     if (mode === 'camera') {
+        captureBtn.style.display = 'flex';
+        cameraLoading.style.display = 'none';
         await startWebcam();
     } else {
         stopWebcam();
