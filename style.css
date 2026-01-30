@@ -409,6 +409,24 @@ body::after {
     max-width: 100%;
     border-radius: 16px;
     box-shadow: var(--shadow-md);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Camera Loading */
+#camera-loading {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+#camera-loading .loading-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 0.8rem;
+}
+
+#camera-loading .loading-text {
+    font-size: 0.95rem;
 }
 
 /* ========== Upload Area ========== */
@@ -517,11 +535,14 @@ body::after {
 .file-upload-content {
     display: none;
     animation: fadeIn 0.4s ease;
+    text-align: center;
 }
 
 .image-preview-wrapper {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1.5rem;
 }
 
@@ -531,6 +552,8 @@ body::after {
     border-radius: 16px;
     box-shadow: var(--shadow-md);
     object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
 
 .result-message {

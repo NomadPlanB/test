@@ -19,6 +19,7 @@ const uploadTab = document.getElementById('upload-tab');
 const cameraTab = document.getElementById('camera-tab');
 const captureBtn = document.getElementById('capture-btn');
 const webcamContainer = document.getElementById('webcam-container');
+const cameraLoading = document.getElementById('camera-loading');
 
 // Global variables
 let model = null;
@@ -44,6 +45,13 @@ const animalNameMap = {
     'puppy': '강아지',
     'kitten': '고양이',
     'bunny': '토끼',
+    'snake': '뱀',
+    'rat': '쥐',
+    'turtle': '거북이',
+    'horse': '말',
+    'pig': '돼지',
+    'chicken': '닭',
+    'cow': '소',
     // 한국어 이름은 그대로 유지
     '강아지': '강아지',
     '고양이': '고양이',
@@ -55,7 +63,14 @@ const animalNameMap = {
     '사자': '사자',
     '호랑이': '호랑이',
     '햄스터': '햄스터',
-    '공룡': '공룡'
+    '공룡': '공룡',
+    '뱀': '뱀',
+    '쥐': '쥐',
+    '거북이': '거북이',
+    '말': '말',
+    '돼지': '돼지',
+    '닭': '닭',
+    '소': '소'
 };
 
 // 동물 이모지 매핑
@@ -70,7 +85,14 @@ const animalEmojiMap = {
     '사자': '🦁',
     '호랑이': '🐯',
     '햄스터': '🐹',
-    '공룡': '🦖'
+    '공룡': '🦖',
+    '뱀': '🐍',
+    '쥐': '🐭',
+    '거북이': '🐢',
+    '말': '🐴',
+    '돼지': '🐷',
+    '닭': '🐔',
+    '소': '🐮'
 };
 
 // 동물 메시지 매핑
@@ -85,7 +107,14 @@ const animalMessageMap = {
     '사자': '당당하고 위엄있는 사자상이에요!',
     '호랑이': '강인하고 매력적인 호랑이상이에요!',
     '햄스터': '앙증맞고 사랑스러운 햄스터상이에요!',
-    '공룡': '독특하고 개성 넘치는 공룡상이에요!'
+    '공룡': '독특하고 개성 넘치는 공룡상이에요!',
+    '뱀': '신비롭고 지혜로운 뱀상이에요!',
+    '쥐': '똑똒고 재치있는 쥐상이에요!',
+    '거북이': '느긋하고 인내심 강한 거북이상이에요!',
+    '말': '활기차고 자유로운 말상이에요!',
+    '돼지': '복스럽고 인복 많은 돼지상이에요!',
+    '닭': '부지런하고 책임감 있는 닭상이에요!',
+    '소': '성실하고 믿음직한 소상이에요!'
 };
 
 // 모델 로드
@@ -191,17 +220,9 @@ async function captureFromWebcam() {
     capturedCanvas.height = webcam.canvas.height;
     ctx.drawImage(webcam.canvas, 0, 0);
 
-    // UI 전환
-    cameraArea.style.display = 'none';
-    faceImage.style.display = 'none';
-    capturedCanvas.style.display = 'block';
-    fileUploadContent.style.display = 'block';
-
-    // 로딩 표시
-    loading.style.display = 'block';
-    labelContainer.innerHTML = '';
-    resultMessage.innerHTML = '';
-    retryBtn.style.display = 'none';
+    // 카메라 아래에 로딩 표시
+    captureBtn.style.display = 'none';
+    cameraLoading.style.display = 'block';
 
     // 모델 로드 확인
     if (!isModelLoaded) {
@@ -211,7 +232,12 @@ async function captureFromWebcam() {
     // AI 예측
     await predictFromCanvas(capturedCanvas);
 
-    loading.style.display = 'none';
+    // 로딩 숨기고 결과 표시
+    cameraLoading.style.display = 'none';
+    cameraArea.style.display = 'none';
+    faceImage.style.display = 'none';
+    capturedCanvas.style.display = 'block';
+    fileUploadContent.style.display = 'block';
     retryBtn.style.display = 'flex';
 }
 
@@ -304,6 +330,8 @@ function removeUpload() {
         uploadArea.style.display = 'block';
     } else {
         cameraArea.style.display = 'block';
+        captureBtn.style.display = 'flex';
+        cameraLoading.style.display = 'none';
         startWebcam();
     }
 }
