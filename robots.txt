@@ -1,11 +1,33 @@
 # robots.txt for 동물상 테스트
 # https://test-1f1.pages.dev
 
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Google Image
+User-agent: Googlebot-Image
+Allow: /
+
+# Naver
+User-agent: Yeti
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Daum
+User-agent: Daum
+Allow: /
+
+# All other crawlers
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://test-1f1.pages.dev/sitemap.xml
-
-# Crawl-delay (optional, for polite crawling)
-Crawl-delay: 1
