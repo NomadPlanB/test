@@ -644,6 +644,17 @@ body::after {
     font-size: 0.95rem;
 }
 
+.animal-percent {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 2px;
+}
+
+.animal-box:first-child .animal-percent {
+    color: white;
+}
+
 .animal-description {
     font-size: 0.75rem;
     color: var(--text-muted);
@@ -742,13 +753,335 @@ body::after {
     animation: dots 1.5s steps(4, end) infinite;
 }
 
+/* ========== Content Sections ========== */
+.content-section {
+    padding: 4rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.content-section.alt-bg {
+    background: var(--bg-secondary);
+}
+
+.section-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.section-title.center {
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.section-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* ========== Animal Types Grid ========== */
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.animal-type-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.animal-type-card:hover {
+    transform: var(--hover-lift);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.animal-type-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.animal-type-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.animal-type-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ========== Steps Container ========== */
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.step-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 auto 1.5rem;
+}
+
+.step-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.step-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ========== FAQ Section ========== */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--primary-color);
+}
+
+.faq-question {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.faq-answer {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* ========== Footer ========== */
 .footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    text-align: left;
+}
+
+.footer-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.footer-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-contact {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-email {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.footer-bottom {
     text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-size: 0.85rem;
+}
+
+/* ========== Legal Pages ========== */
+.page-header {
+    padding-top: 120px;
+    padding-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.legal-content {
+    padding: 2rem 0 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.legal-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.legal-section {
+    margin-bottom: 2.5rem;
+}
+
+.legal-section:last-child {
+    margin-bottom: 0;
+}
+
+.legal-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.legal-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 1.25rem 0 0.75rem;
+}
+
+.legal-section p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.legal-section ul {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.legal-section li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.contact-info {
+    background: var(--badge-bg);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.25rem;
 }
 
 /* ========== Animations ========== */
@@ -823,6 +1156,120 @@ body::after {
 /* ========== Responsive Design ========== */
 
 /* 태블릿 */
+@media screen and (max-width: 768px) {
+    .content-section {
+        padding: 3rem 0;
+    }
+
+    .section-card {
+        padding: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .animal-grid {
+        gap: 1rem;
+    }
+
+    .animal-type-card {
+        padding: 1.5rem;
+    }
+
+    .animal-type-emoji {
+        font-size: 2.5rem;
+    }
+
+    .steps-container {
+        gap: 1.5rem;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .legal-card {
+        padding: 1.75rem;
+    }
+}
+
+/* 모바일 */
+@media screen and (max-width: 480px) {
+    .content-section {
+        padding: 2.5rem 0;
+    }
+
+    .section-card {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .animal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .animal-type-card {
+        padding: 1.25rem;
+    }
+
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+    .step-card {
+        padding: 1.5rem;
+    }
+
+    .faq-item {
+        padding: 1.25rem;
+    }
+
+    .faq-question {
+        font-size: 0.95rem;
+    }
+
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .page-header {
+        padding-top: 100px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .legal-card {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .legal-section h2 {
+        font-size: 1.1rem;
+    }
+}
+
+/* 태블릿 - 기존 스타일 */
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 0.8rem 0;

@@ -415,6 +415,7 @@ function displayResults(predictions) {
             <div class="animal-emoji">${emoji}</div>
             <div class="animal-info">
                 <div class="animal-label">${koreanName}상</div>
+                <div class="animal-percent">${percent}%</div>
                 <div class="animal-description">${description}</div>
             </div>
             <div class="bar-container">
@@ -427,7 +428,6 @@ function displayResults(predictions) {
                     </div>
                 </div>
             </div>
-            <div class="percent-text">${percent}%</div>
         `;
 
         labelContainer.appendChild(div);
