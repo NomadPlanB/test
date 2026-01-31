@@ -1602,3 +1602,48 @@ body, .navbar, .file-upload, .animal-box, #theme-btn {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ========== GEO Optimized Styles ========== */
+.section-subtitle-small {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.recommend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recommend-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.recommend-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Animal card GEO style */
+.animal-type-card .animal-type-desc {
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.animal-type-card .animal-type-desc:last-child {
+    margin-bottom: 0;
+}
+
+.animal-type-card .animal-type-desc strong {
+    color: var(--text-color);
+}
