@@ -1,0 +1,14 @@
+# URL Canonicalization - redirect www to non-www (if applicable)
+# Cloudflare Pages handles this automatically, but these are for edge cases
+
+# Redirect index.html to root
+/index.html  /  301
+
+# Redirect trailing slashes (except root)
+/privacy.html/  /privacy.html  301
+/terms.html/    /terms.html    301
+
+# Handle common typos or old URLs
+/test       /   301
+/animal     /#animal-types  301
+/faq        /#faq           301
