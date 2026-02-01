@@ -349,6 +349,7 @@ function removeUpload() {
     fileUploadContent.style.display = 'none';
     labelContainer.innerHTML = '';
     resultMessage.innerHTML = '';
+    shareSection.style.display = 'none';
 
     if (currentMode === 'upload') {
         uploadArea.style.display = 'block';
@@ -400,6 +401,10 @@ function displayResults(predictions) {
     const topMessage = animalMessageMap[topKoreanName] || `${topKoreanName}상이에요!`;
 
     resultMessage.innerHTML = `${topEmoji} ${topMessage}`;
+
+    // 공유 섹션 표시
+    const topPercent = (sorted[0].probability * 100).toFixed(1);
+    showShareSection(topKoreanName, topEmoji, topPercent);
 
     // 결과 바 생성
     sorted.forEach((p, index) => {
@@ -523,3 +528,150 @@ prefersDark.addEventListener('change', (e) => {
 
 // 페이지 로드 시 테마 초기화
 initTheme();
+
+// ========== SNS 공유 기능 ==========
+const shareSection = document.getElementById('share-section');
+const shareKakao = document.getElementById('share-kakao');
+const shareFacebook = document.getElementById('share-facebook');
+const shareTwitter = document.getElementById('share-twitter');
+const shareCopy = document.getElementById('share-copy');
+
+// 현재 결과 저장용 변수
+let currentResult = {
+    animal: '',
+    emoji: '',
+    percent: ''
+};
+
+// 사이트 정보
+const SITE_URL = 'https://test-1f1.pages.dev/';
+const SITE_NAME = 'AI 동물상 테스트';
+
+// 카카오 SDK 초기화 (실제 배포 시 JavaScript 키로 변경 필요)
+// Kakao Developers에서 앱 등록 후 JavaScript 키를 발급받아 사용하세요
+try {
+    if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+        // TODO: 실제 카카오 JavaScript 키로 교체 필요
+        // Kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY');
+        console.log('카카오 SDK 초기화를 위해 JavaScript 키가 필요합니다.');
+    }
+} catch (e) {
+    console.log('카카오 SDK 로드 중...');
+}
+
+// 공유 섹션 표시
+function showShareSection(animal, emoji, percent) {
+    currentResult = { animal, emoji, percent };
+    shareSection.style.display = 'block';
+}
+
+// 공유 메시지 생성
+function getShareMessage() {
+    return `${currentResult.emoji} 나는 ${currentResult.animal}상! (${currentResult.percent}%)\n\nAI 동물상 테스트로 나의 동물상을 확인해보세요!`;
+}
+
+// 카카오톡 공유
+shareKakao.addEventListener('click', () => {
+    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
+        Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: `${currentResult.emoji} 나는 ${currentResult.animal}상!`,
+                description: `AI 동물상 테스트 결과: ${currentResult.animal}상 ${currentResult.percent}%\n나도 동물상 테스트 해보기!`,
+                imageUrl: 'https://test-1f1.pages.dev/og-image.png',
+                link: {
+                    mobileWebUrl: SITE_URL,
+                    webUrl: SITE_URL
+                }
+            },
+            buttons: [
+                {
+                    title: '나도 테스트하기',
+                    link: {
+                        mobileWebUrl: SITE_URL,
+                        webUrl: SITE_URL
+                    }
+                }
+            ]
+        });
+    } else {
+        // 카카오 SDK가 초기화되지 않은 경우 카카오톡 공유 URL로 대체
+        const message = encodeURIComponent(getShareMessage() + '\n' + SITE_URL);
+        window.open(`https://story.kakao.com/share?url=${encodeURIComponent(SITE_URL)}&text=${message}`, '_blank', 'width=600,height=400');
+    }
+});
+
+// 페이스북 공유
+shareFacebook.addEventListener('click', () => {
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}&quote=${encodeURIComponent(getShareMessage())}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+});
+
+// X(트위터) 공유
+shareTwitter.addEventListener('click', () => {
+    const text = `${currentResult.emoji} 나는 ${currentResult.animal}상! (${currentResult.percent}%)\n\nAI 동물상 테스트로 나의 동물상을 확인해보세요!`;
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_URL)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+});
+
+// 링크 복사
+shareCopy.addEventListener('click', async () => {
+    const textToCopy = getShareMessage() + '\n' + SITE_URL;
+
+    try {
+        await navigator.clipboard.writeText(textToCopy);
+        showCopyToast('링크가 복사되었습니다!');
+
+        // 버튼 상태 변경
+        shareCopy.classList.add('copied');
+        shareCopy.querySelector('span').textContent = '복사됨!';
+
+        setTimeout(() => {
+            shareCopy.classList.remove('copied');
+            shareCopy.querySelector('span').textContent = '링크복사';
+        }, 2000);
+    } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = textToCopy;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            showCopyToast('링크가 복사되었습니다!');
+        } catch (e) {
+            showCopyToast('복사에 실패했습니다.');
+        }
+
+        document.body.removeChild(textArea);
+    }
+});
+
+// 토스트 메시지 표시
+function showCopyToast(message) {
+    // 기존 토스트 제거
+    const existingToast = document.querySelector('.copy-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // 새 토스트 생성
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // 애니메이션
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    // 자동 제거
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
